@@ -10,10 +10,11 @@ export const createArticle = async ( req: ArticlePostRequest, res: Response): Pr
 };
 
 export const getArticles = async (req: ArticleGetRequest, res: Response ): Promise<void> => {
-    const { search, brand } = req.query;
-    const isActive = req.query.isActive === "true";
+    const { search, brand, isActive } = req.query;
+    const active = isActive === undefined || isActive === '' ? undefined : (isActive === 'true');
 
-    const { message, code, results } = await ArticleMethods.getArticle(search, brand, isActive);
+
+    const { message, code, results } = await ArticleMethods.getArticle(search, brand, active);
 
     res.status( code ).json( { results, message } )
 };

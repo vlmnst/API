@@ -7,16 +7,22 @@ import { SqlError } from "../interfaces/error.interface";
 
 export const getArticle = async (search: string = "", brand?: string, active?: boolean ): Promise<ResponseAttributes<ArticleModel>> => {
 
-    const name =  { [Op.like]: `%${search}%` }
-    const where = brand ? {
-        name,
-        brand,
-        active
-    } : {
-        name,
-        active
-    }
-    const resultArticle = await ArticleModel.findAll({ where })
+    let initWhere = {
+        name: { [Op.like]: `%${search}%` }
+    };
+
+    let whereBrand;
+    if( brand ) {
+        whereBrand = { brand }
+    };
+
+    let whereActive;
+    if( active !== undefined){
+        whereActive ={ active }
+    };
+
+    const where = {...initWhere, ...whereBrand, ...whereActive};
+    const resultArticle = await ArticleModel.findAll({ where });
 
     return {
         message: "Articles found.",
