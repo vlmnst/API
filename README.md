@@ -4,7 +4,7 @@ Este repositorio está dividido en dos secciones principales: **API** y **Ejerci
 
 ## Ejercicios 📚
 
-En la carpeta `Ejercicios` se encuentran resueltos los problemas planteados previos al challenge, donde se trabajan algoritmos, bases de datos, entre otros.
+En la carpeta `Ejercicios` se encuentran resueltos los problemas planteados previos al challenge, bases de datos, entre otros.
 
 ## API 🛠️
 
