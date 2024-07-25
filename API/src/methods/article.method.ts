@@ -59,6 +59,7 @@ export const updateArticle = async ( id: number, updatedValues: ArticleUpdateAtt
         message: "Article updated succesfully",
     };
   } catch (error) {
+        if ( error instanceof CustomError ) throw error
         const err = error as SqlError;
         if ( err.parent?.sqlState == "23000" ) throw new CustomError( `${err.parent.sqlMessage}`, 403 );
         throw new CustomError( `${err.message}`, 500 );

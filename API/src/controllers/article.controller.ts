@@ -34,8 +34,8 @@ export const updateArticle = async ( req: ArticleUpdateRequest, res: Response ):
 export const deleteArticle = async ( req: ArticleUpdateRequest, res: Response ): Promise <void> => {
     const id = Number(req.params.id)
 
-    const { message, code } = await ArticleMethods.updateArticle( id, { active: false } )
+    const { code } = await ArticleMethods.updateArticle( id, { active: false } )
 
-    res.status( code ).json( { message } )
+    res.status( code ).json( { message: "The article is inactive now" } )
 
 }
