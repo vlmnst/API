@@ -1,0 +1,34 @@
+services:
+  mysql:
+    image: mysql:8.0.39
+    container_name: mysql-mypj
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD_DATABASE}
+      MYSQL_DATABASE: ${NAME_DATABASE}
+      MYSQL_PASSWORD: ${PASSWORD_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-mypj
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: ${PORT}
+      SECRET: ${SECRET}
+      HOST_DATABASE:  ${HOST_DATABASE}
+      NAME_DATABASE: ${NAME_DATABASE}
+      USER_DATABASE: ${USER_DATABASE}
+      PASSWORD_DATABASE: ${PASSWORD_DATABASE}
+    volumes:
+      - /home/vlmnst/.ssh:/root/.ssh 
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
